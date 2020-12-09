@@ -8,7 +8,7 @@ import ErrorBoundry from '../error-boundry';
 import ErrorMessage from '../error-message';
 import Row from '../row';
 import ItemDetails, {Record} from '../item-details';
-import ItemList from '../item-list';
+import {SwapiServiceProvider} from '../swapi-service-contex';
 
 import {
   PersonDetails,
@@ -84,18 +84,20 @@ export default class App extends Component {
 
     return (
       <ErrorBoundry>
-        <div>
-          <Header />
+        <SwapiServiceProvider value={this.swapiService} >
+          <div>
+            <Header />
 
-          <PersonDetails itemId={11}/>
-          <PlanetDetails itemId={11}/>
-          <StarshipDetails itemId={11}/>
+            <PersonDetails itemId={11}/>
+            <PlanetDetails itemId={11}/>
+            <StarshipDetails itemId={11}/>
 
-          <PersonList/>
-          <StarshipList/>
-          <PlanetList/>
-          
-        </div>
+            <PersonList/>
+            <StarshipList/>
+            <PlanetList/>
+            
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
   }
