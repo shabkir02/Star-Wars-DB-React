@@ -25,14 +25,12 @@ export default class ItemDetails extends Component {
   }
 
   componentDidMount() {
+    this.setState({loading: true});
     this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.itemId !== prevProps.itemId) {
-      this.setState({
-        loading: true
-      })
       this.updateItem();
     }
   }
@@ -41,7 +39,11 @@ export default class ItemDetails extends Component {
     const {itemId, getData, getImageUrl} = this.props;
     if (!itemId) {
       return;
-    }
+    };
+
+    this.setState({
+      loading: true
+    });
 
     getData(itemId)
         .then((item) => {
@@ -55,7 +57,7 @@ export default class ItemDetails extends Component {
 
   render() {
 
-    const {image, item} = this.state;
+    const {image, item, loading} = this.state;
 
     if (!item) {
       return <span>Select a person from a list</span>
@@ -63,14 +65,14 @@ export default class ItemDetails extends Component {
 
     const {name} = item;
 
-    if (this.state.loading) {
+    if (loading) {
       return <Spinner/>
     }
 
     return (
       <div className="item-details card">
         <img className="item-image"
-          src={image} />
+          src={image} alt={name} />
 
         <div className="card-body">
           <h4>{name}</h4>
