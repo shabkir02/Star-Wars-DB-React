@@ -6,7 +6,7 @@ import Row from '../row';
 export default class StarshipPage extends Component {
 
   state = {
-    selectedItem: 2
+    selectedItem: null
   }
 
   onItemSelected = (selectedItem) => {
